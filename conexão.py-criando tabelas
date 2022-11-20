@@ -1,0 +1,29 @@
+import mysql.connector
+
+# conexão criada
+con = mysql.connector.connect(host='localhost', database = 'allan_jr', user = 'root', password= '1q2w3e4r')
+
+# mostra que está conectado
+if con.is_connected():
+    db_info = con.get_server_info()
+    print("conectado ao servidor mysql versão", db_info)
+
+# variável criada com os parâmetros a serem executados no db
+
+criar_tabela = """CREATE TABLE pessoa( 
+                   nome VARCHAR (30),
+                   telefone INT (11),
+                   nascimento DATE        
+                   );"""
+
+# agora criamos um cursor para usar a variável e executar o comando no db
+
+cursor = con.cursor()
+cursor.execute(criar_tabela)
+print("tabela criada com sucesso!!!")
+
+# finalizando a conexão com o database
+if con.is_connected ():
+   
+    con.close()
+    print("a conexão ao mysql foi encerrada")
